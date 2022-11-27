@@ -5,7 +5,12 @@
 ###############################################################################
 
 SCREEN_HEIGHT = 600
-SCREEN_WIDTH = 800
-BG = (50, 50, 50)
+SCREEN_WIDTH = 1200
+BG = (0, 0, 50)
 FPS = 60
 
+# Colors
+BLACK = (0, 0, 0)
+
+SIZE_MULTIPLIER = 16
+ANIMATION_COOLDOWN = 150
