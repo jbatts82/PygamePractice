@@ -15,8 +15,8 @@ class Mario:
         self.sprite_sheet = pygame.image.load(const.MARIO_SPRITE_SHEET_LOC).convert_alpha()
         self.create_animation_dictionary()
         self.last_update = pygame.time.get_ticks()
-        self.animation_idx = 0
-        self.frame_idx = 0
+        self.setup_counters()
+        self.state = const.STAND
 
     # chopping up 'mario_bros.png' into actions and frames
     def create_animation_dictionary(self):
@@ -30,10 +30,13 @@ class Mario:
         self.left_small_reg_frames = []
         self.left_big_reg_frames = []
 
-        # Get images for right side small mario
+        # Get images for right side mario
         self.right_small_reg_frames.append(sprite_tool.extract_image(80, 32, 16, 16))
         self.right_small_reg_frames.append(sprite_tool.extract_image(80 + 16, 32, 16, 16))
         self.right_small_reg_frames.append(sprite_tool.extract_image(80 + 16 + 16, 32, 16, 16))
+        self.right_big_reg_frames.append(sprite_tool.extract_image(80, 0, 16, 32))
+        self.right_big_reg_frames.append(sprite_tool.extract_image(80 + 16 + 16, 0, 16, 32))
+        self.right_big_reg_frames.append(sprite_tool.extract_image(80 + 16, 0, 16, 32))
 
         # Create images for left side mall mario
         for frame in self.right_small_reg_frames:
@@ -42,10 +45,8 @@ class Mario:
 
         self.reg_small_frames = [self.right_small_reg_frames, self.left_small_reg_frames]
 
-
     def set_animation(self, idx):
         self.animation_idx = idx
-
 
     def update_frame(self):
         # check if update is ready
@@ -54,9 +55,19 @@ class Mario:
         if delta_time >= const.ANIMATION_COOLDOWN:
             self.frame_idx += 1
             self.last_update = current_time
-            if self.frame_idx >= len(self.right_small_reg_frames):
+            if self.frame_idx >= len(self.right_big_reg_frames):
                 self.frame_idx = 0
 
+    def setup_counters(self):
+        # Keep track of various
+        self.animation_idx = 0
+        self.frame_idx = 0
 
     def move(self):
         pass
+
+    def handle_state(self, keys):
+        if self.state == const.STAND:
+            self.standing(keys)
+        elif self.state == const.WALK:
+            self.walking(keys)

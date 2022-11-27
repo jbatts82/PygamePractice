@@ -53,5 +53,5 @@ class Control:
     def process_gfx(self):
         self.mario.update_frame()
         self.screen.blit(self.background_img, (0, 0))
-        self.screen.blit(self.mario.right_small_reg_frames[self.mario.frame_idx], (0, (1080/3)-39))
+        self.screen.blit(self.mario.right_big_reg_frames[self.mario.frame_idx], (0, (1080/3)-40*4))
         pygame.display.update()
