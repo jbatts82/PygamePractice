@@ -6,12 +6,13 @@
 
 # screen constants
 MAIN_CAPTION = 'Mario Lab'
-SCREEN_HEIGHT = 600
-SCREEN_WIDTH = 1200
+SCREEN_WIDTH = 640
+SCREEN_HEIGHT = 480
+
 
 # system constants
 FPS = 60
-SIZE_MULTIPLIER = 16
+SIZE_MULTIPLIER = 8
 ANIMATION_COOLDOWN = 150
 
 # images
@@ -21,3 +22,6 @@ BACKGROUND_PNG_LOC = 'resources/graphics/simple_bg.png'
 # colors
 BLACK = (0, 0, 0)
 BG = (0, 0, 50)
+
+# mario constants
+MARIO_SPEED = 2

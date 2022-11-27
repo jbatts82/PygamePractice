@@ -7,14 +7,18 @@
 import pygame
 import data.constants as const
 import states.spriteSheet as ss
+import data.game_objects
 
 
-class Mario(pygame.sprite.Sprite):
+class Mario:
     def __init__(self):
+        # get mario animations
         self.sprite_sheet = pygame.image.load(const.MARIO_SPRITE_SHEET_LOC).convert_alpha()
-        self.frame = 0
-        self.last_update = pygame.time.get_ticks()
         self.load_images_from_sheet()
+        # initialize animation data
+        self.frame = 0
+        self.speed = const.MARIO_SPEED
+        self.last_update = pygame.time.get_ticks()
 
 
     def load_images_from_sheet(self):
@@ -29,8 +33,8 @@ class Mario(pygame.sprite.Sprite):
 
         # Get images for right side small mario
         self.right_small_reg_frames.append(sprite_tool.extract_image(80, 32, 16, 16))
-        self.right_small_reg_frames.append(sprite_tool.extract_image(80+16, 32, 16, 16))
-        self.right_small_reg_frames.append(sprite_tool.extract_image(80+16+16, 32, 16, 16))
+        self.right_small_reg_frames.append(sprite_tool.extract_image(80 + 16, 32, 16, 16))
+        self.right_small_reg_frames.append(sprite_tool.extract_image(80 + 16 + 16, 32, 16, 16))
 
         # Create images for left side mall mario
         for frame in self.right_small_reg_frames:
@@ -40,7 +44,7 @@ class Mario(pygame.sprite.Sprite):
         self.reg_small_frames = [self.right_small_reg_frames, self.left_small_reg_frames]
 
 
-    def process(self):
+    def update_animation(self):
         # update animation
         current_time = pygame.time.get_ticks()
         delta_time = current_time - self.last_update

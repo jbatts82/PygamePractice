@@ -29,10 +29,20 @@ class Control:
         self.screen = pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT))
         pygame.display.set_caption(const.MAIN_CAPTION)
         self.background_img = pygame.image.load(const.BACKGROUND_PNG_LOC).convert_alpha()
+        self.background_img = pygame.transform.scale(self.background_img,
+                                                     (const.SCREEN_WIDTH,
+                                                      const.SCREEN_HEIGHT))
 
         # create mario
         self.mario = data.mario.Mario()
 
+        objects = [self.mario]
+
+
+    def event_handler(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.run_game = False
 
 
     def main_loop(self):
@@ -44,17 +54,11 @@ class Control:
 
 
     def process_gfx(self):
-        # self.screen.fill(const.BG)
-        self.mario.process()
+
+        self.mario.update_animation()
         self.screen.blit(self.background_img, (0, 0))
-        self.screen.blit(self.mario.right_small_reg_frames[self.mario.frame], (0, 0))
+        self.screen.blit(self.mario.right_small_reg_frames[self.mario.frame], (0, (1080/3)-39))
 
         pygame.display.update()
 
 
-
-
-    def event_handler(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.run_game = False
