@@ -10,11 +10,12 @@ import states.spriteSheet as ss
 
 
 class Mario(pygame.sprite.Sprite):
-    def __init__(self, sprite_sheet):
-        self.sprite_sheet = sprite_sheet
+    def __init__(self):
+        self.sprite_sheet = pygame.image.load(const.MARIO_SPRITE_SHEET_LOC).convert_alpha()
         self.frame = 0
         self.last_update = pygame.time.get_ticks()
         self.load_images_from_sheet()
+
 
     def load_images_from_sheet(self):
         self.right_frames = []
@@ -38,15 +39,13 @@ class Mario(pygame.sprite.Sprite):
 
         self.reg_small_frames = [self.right_small_reg_frames, self.left_small_reg_frames]
 
+
     def process(self):
         # update animation
-
         current_time = pygame.time.get_ticks()
         delta_time = current_time - self.last_update
-
         if delta_time >= const.ANIMATION_COOLDOWN:
             self.frame += 1
             self.last_update = current_time
             if self.frame >= len(self.right_small_reg_frames):
                 self.frame = 0
-
