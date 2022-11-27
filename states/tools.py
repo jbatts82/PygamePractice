@@ -33,9 +33,8 @@ class Control:
                                                      (const.SCREEN_WIDTH,
                                                       const.SCREEN_HEIGHT))
 
-        # create mario
+        # create game objects
         self.mario = data.mario.Mario()
-
         objects = [self.mario]
 
 
@@ -46,19 +45,13 @@ class Control:
 
 
     def main_loop(self):
-        print("main_loop")
         while self.run_game:
             self.process_gfx()
             self.event_handler()
             self.clock.tick(const.FPS)
 
-
     def process_gfx(self):
-
-        self.mario.update_animation()
+        self.mario.update_frame()
         self.screen.blit(self.background_img, (0, 0))
-        self.screen.blit(self.mario.right_small_reg_frames[self.mario.frame], (0, (1080/3)-39))
-
+        self.screen.blit(self.mario.right_small_reg_frames[self.mario.frame_idx], (0, (1080/3)-39))
         pygame.display.update()
-
-
