@@ -25,26 +25,33 @@ class Control:
         # set up clock
         self.clock = pygame.time.Clock()
 
-        # create screen
+        # create screen with simple background
         self.screen = pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT))
         pygame.display.set_caption(const.MAIN_CAPTION)
+        self.background_img = pygame.image.load(const.BACKGROUND_PNG_LOC).convert_alpha()
 
         # create mario
         self.mario = data.mario.Mario()
 
+
+
     def main_loop(self):
         print("main_loop")
         while self.run_game:
-            self.process()
+            self.process_gfx()
             self.event_handler()
-            pygame.display.update()
             self.clock.tick(const.FPS)
 
 
-    def process(self):
-        self.screen.fill(const.BG)
+    def process_gfx(self):
+        # self.screen.fill(const.BG)
         self.mario.process()
+        self.screen.blit(self.background_img, (0, 0))
         self.screen.blit(self.mario.right_small_reg_frames[self.mario.frame], (0, 0))
+
+        pygame.display.update()
+
+
 
 
     def event_handler(self):

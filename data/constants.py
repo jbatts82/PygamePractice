@@ -16,6 +16,7 @@ ANIMATION_COOLDOWN = 150
 
 # images
 MARIO_SPRITE_SHEET_LOC = 'resources/graphics/mario_bros.png'
+BACKGROUND_PNG_LOC = 'resources/graphics/simple_bg.png'
 
 # colors
 BLACK = (0, 0, 0)
