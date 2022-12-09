@@ -13,7 +13,8 @@ keybindings = {
     'jump': pygame.K_a,
     'left': pygame.K_LEFT,
     'right': pygame.K_RIGHT,
-    'down': pygame.K_DOWN
+    'down': pygame.K_DOWN,
+    'up': pygame.K_UP
 }
 
 
@@ -42,6 +43,21 @@ class Control:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.run_game = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == keybindings['down']:
+                    print("Down")
+                if event.key == keybindings['up']:
+                    print("Up")
+                if event.key == keybindings['left']:
+                    print("Left")
+                if event.key == keybindings['right']:
+                    print("Right")
+                if event.key == keybindings['action']:
+                    print("Action")
+                if event.key == keybindings['jump']:
+                    print("Jump")
+
+
 
 
     def main_loop(self):
